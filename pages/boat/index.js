@@ -1,0 +1,89 @@
+import Boat from "@/components/Boat";
+import Layout from "@/components/Layout";
+import PageHeaderBlock from "@/components/PageHeader";
+import Post from "@/components/Post";
+import { getBoats } from "@/libs/getBoats";
+import { getPosts } from "@/libs/getPosts";
+import { IconNewSection } from "@tabler/icons";
+import Link from "next/link";
+
+export default function Boats({ boats, posts }) {
+  const allBoat = posts.map((boat) => boat.frontMatter.boat);
+  const postCount = [];
+  allBoat.forEach((x) => {
+    postCount[x] = (postCount[x] || 0) + 1;
+  });
+
+  return (
+    <Layout metaTitle="Our Boats">
+      <PageHeaderBlock title="Boat" />
+
+      <section className="section-sm pt-0">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-10 mx-auto">
+              <div className="row gx-4 gy-5 gx-md-5 justify-content-center text-center">
+                {boats.map((boat, i) => (
+                  <div key={i} className="col-lg-4 col-sm-6">
+                    <Boat boat={boat} postCount={postCount} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <hr className="bg-primary" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-sm pb-0">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 text-center">
+              <h2 className="section-title">
+                <span>Recent posts</span>
+              </h2>
+            </div>
+          </div>
+          <div className="row gy-5 gx-4 g-xl-5">
+            {posts
+              .filter((post, i) => i < 4)
+              .map((post, i) => (
+                <div key={i} className="col-lg-6">
+                  <Post post={post} boats={boats} />
+                </div>
+              ))}
+
+            <div className="col-12 text-center">
+              <Link href={`/trip`}>
+                <a className="btn btn-primary mt-5" aria-label="View all posts">
+                  <i className="me-2">
+                    <IconNewSection size={16} />
+                  </i>
+                  View all posts
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      boats: getBoats(),
+      posts: getPosts(),
+    },
+  };
+}

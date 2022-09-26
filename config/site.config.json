@@ -1,0 +1,16 @@
+{
+  "metaData": {
+    "title" : "Delta Trip | Minimal NextJS Trip Template",
+    "description" : "Delta Trip - a minimal nextjs trip template",
+    "author" : "PlatolTheme",
+    "keyword" : "qurno, minimal, react, nextjs, trip, template",
+    "ogImage" : "https://qurno-nextjs.vercel.app/images/ogimage.jpg"
+  },
+  "baseURL" : "https://qurno-nextjs.vercel.app/",
+  "logo" : "/images/logo.png",
+  "logo_light" : "/images/logo-light.png",
+  "logoText" : "Delta Trip",
+  "favicon" : "/images/favicon.png",
+  "postPerPage" : 6,
+  "copyright" : "© 2022 Delta Trip. All rights reserved."
+}
